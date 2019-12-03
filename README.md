@@ -46,7 +46,7 @@ bitcoind -regtest -rest=1
 Access RPC Through the command line
 -----------------------------------
 ```bash
-curl --user david:2fd5934 \
+curl --user csknk:151b7e69 \
 --data-binary '{"jsonrpc":"1.0","id":"curltext","method":"listunspent","params":[]}' \
 -H 'content-type:text/plain;' http://192.168.122.18:18443/ \
 | jq '.result[] | {address: .address,txid: .txid, amount: .amount, vout: .vout}'
@@ -78,6 +78,25 @@ Output:
 }
 
 ```
+Using the Command Line
+----------------------
+In the `curl` example shown above, there are no shell variables, and variable expansion is not an issue.
+
+Consider the following example:
+
+```bash
+# assign a transaction id to a shell variable
+TXID=f44df8d739d61ec181e9045762fbc07c80c75c5b608b4ecea98af8098d7d9f98
+
+curl --user csknk:151b7e69 \
+--data-binary '{"jsonrpc":"1.0","id":"curltext","method":"gettransaction","params":["'${TXID}'"]}' \
+-H 'content-type:text/plain;' http://127.0.0.1:5555/ | jq
+```
+
+References
+----------
+* [http authentication with curl][3]
 
 [1]: https://github.com/bitcoin/bitcoin
 [2]: https://curl.haxx.se/
+[3]: https://ec.haxx.se/cmdline-passwords.html?q=
