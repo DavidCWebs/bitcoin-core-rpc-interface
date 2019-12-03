@@ -92,6 +92,11 @@ curl --user csknk:151b7e69 \
 --data-binary '{"jsonrpc":"1.0","id":"curltext","method":"gettransaction","params":["'${TXID}'"]}' \
 -H 'content-type:text/plain;' http://127.0.0.1:5555/ | jq
 ```
+Note that the `--data-binary` data is enclosed in single quotes - this is necessary so that the shell interprets the data as a single parameter, regardless of spaces.
+
+The single quotes pass all the enclosed data verbatim - including the double quotes, which are necessary for the payload to be properly formed JSON.
+
+Where the variable `$TXID` is inserted in the middle of the single quoted section, the single quotes must be ended so that the shell can expand the variable and restarted after the variable.
 
 References
 ----------

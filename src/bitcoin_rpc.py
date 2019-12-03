@@ -27,7 +27,7 @@ class BitcoinRPC:
                     headers=self.headers,
                     auth=(self.rpc_user, self.rpc_password)
                     )
-            print(response.status_code)
+            # print(response.status_code)
             # Return JSON format - handy since jq can be used for post-processing
             # if python format required, return json.loads(response.text)
             full = response.json()
