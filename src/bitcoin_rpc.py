@@ -1,17 +1,20 @@
 #!/usr/bin/env python3
 
 import requests, json
-from . import config
+#from . import config
 
 class BitcoinRPC:
     headers = {'content-type': "application/json", 'cache-control': "no-cache"}
 
-    def __init__(self, network=None):
-        if network == None:
-            network = "regtest"
-        self.url = getattr(config, network)["url"]
-        self.rpc_user = getattr(config, network)["rpc_user"]
-        self.rpc_password = getattr(config, network)["rpc_password"]
+    #def __init__(self, network=None):
+    def __init__(self, config_file="src/config.json"):
+        #if network == None:
+        #    network = "regtest"
+        with open(config_file) as json_data_file:
+            config = json.load(json_data_file)
+        self.url = config["url"]
+        self.rpc_user = config["rpc_user"]
+        self.rpc_password = config["rpc_password"]
         #self.report()
 
     def report(self):

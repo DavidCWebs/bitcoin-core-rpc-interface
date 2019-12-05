@@ -24,7 +24,7 @@ rpcallowip=192.168.122.0/24 # Allow access fromm the 192.168.122 subnet
 server=1 # Tells the bitcoin server to accept JSON-RPC commands
 rpcuser=yourusername # Required for the JSON-RPC API
 rpcpassword=yourpassword # Required
-
+rest=1
 ```
 Note that you must specify `rpcallowip` - by default, only RPC connections from localhost are permitted. You can specify multiple `rpcallowip` on multiple lines.
 
@@ -40,13 +40,17 @@ Start bitcoind
 To start Bitcoin regtest local test network, with the REST API enabled: 
 
 ```bash
+bitcoind -regtest
+
+# If the REST interface is not enabled in `~/.bitcoin/bitcoin.conf:
 bitcoind -regtest -rest=1
 ```
 
 Access RPC Through the command line
 -----------------------------------
+Not a real password...
 ```bash
-curl --user csknk:151b7e69 \
+curl --user alice:password123 \
 --data-binary '{"jsonrpc":"1.0","id":"curltext","method":"listunspent","params":[]}' \
 -H 'content-type:text/plain;' http://192.168.122.18:18443/ \
 | jq '.result[] | {address: .address,txid: .txid, amount: .amount, vout: .vout}'

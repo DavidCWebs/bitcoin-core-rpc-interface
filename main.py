@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
+import sys
 
 from src.bitcoin_rpc import BitcoinRPC
 
-def main():
-    request = BitcoinRPC()
+def main(config_file):
+    request = BitcoinRPC(config_file)
     #print(request.call("listunspent"))
-    print(request.call("getblockhash", 1))
+    #print(request.call("getblockhash", 1))
 
     # Example showing multiple params
     # --------------------------------
@@ -17,4 +18,7 @@ def main():
     print(request.call("gettransaction", params))
 
 if __name__ == '__main__':
-    main()
+    if len(sys.argv) == 2:
+        main(sys.argv[1])
+    else:
+        main("src/config.json")

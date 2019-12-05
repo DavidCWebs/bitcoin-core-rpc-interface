@@ -1,0 +1,8 @@
+{
+        "network": "regtest",
+        "rpc_user": "alice",
+        "rpc_password": "410a2a77e986aa534a8a",
+        "url": "http://127.0.0.1:5555"
+}
+
+
